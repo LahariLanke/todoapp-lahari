@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body style="background-color: rgb(184, 29, 145);">
+    {% extends 'home.html' %}
+
+    {% block title %}To-Do List{% endblock %}
+    
+    {% block content %}
+      <h1>To-Do List</h1>
+    
+      <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Add</button>
+      </form>
+    
+      <ul>
+        {% for task in tasks %}
+          <li>
+            {% if task.completed %}
+              <s>{{ task.title }}</s>
+            {% else %}
+              {{ task.title }}
+            {% endif %}
+          </li>
+        {% empty %}
+          <li>No tasks yet.</li>
+        {% endfor %}
+      </ul>
+    {% endblock %}
+    
+
+</body>
+</html>
